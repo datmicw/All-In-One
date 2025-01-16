@@ -8,4 +8,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="resources\" />
+    <Folder Include="src\Models\" />
+    <Folder Include="src\Utilities\Office_Windows\" />
+  </ItemGroup>
+
 </Project>
