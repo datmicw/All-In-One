@@ -1,77 +1,132 @@
-﻿using System;
+﻿using All_In_One.src.Utilities.Crawl;
+using All_In_One.src.Utilities.Office_Windows;
+using All_In_One.src.Utilities.SourceFile;
+using System;
+using System.Text;
 
 internal class Program
 {
-    private static async Task Main(string[] args)
+    private static void Main(string[] args) // Khai báo phương thức Main là đồng bộ
     {
-        int consoleWidth = Console.WindowWidth;
-        int consoleHeight = Console.WindowHeight;
+        Encoding ascii = Encoding.ASCII;
 
-        string title = "Welcome to the Tool Aggregator";
-        string[] options = {
-            "1. Open Tool 1",
-            "2. Open Tool 2",
-            "3. Open Tool 3",
-            "4. Settings",
-            "5. Exit"
-        };
+        OW ow = new OW();
+        FileExtention fileExtention = new FileExtention();
 
-        int titlePositionX = (consoleWidth - title.Length) / 2;
-        int titlePositionY = consoleHeight / 4;
-
-        Console.SetCursorPosition(titlePositionX, titlePositionY);
-        Console.ForegroundColor = ConsoleColor.Cyan;
-        Console.WriteLine(title);
-        Console.ResetColor();
-
-        int optionPositionY = titlePositionY + 2;
-        foreach (var option in options)
+        while (true)
         {
-            int optionPositionX = (consoleWidth - option.Length) / 2;
-            Console.SetCursorPosition(optionPositionX, optionPositionY);
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine(option);
-            optionPositionY++;
-        }
+            Console.Clear(); // Làm mới màn hình
 
-        Console.ResetColor();
-        bool exit = false;
+            int consoleWidth = Console.WindowWidth;
+            int consoleHeight = Console.WindowHeight;
 
-        while (!exit)
-        {
-            Console.SetCursorPosition((consoleWidth - "Enter your choice (1-5): ".Length) / 2, consoleHeight - 3);
-            Console.Write("Enter your choice (1-5): ");
-            string choice = Console.ReadLine();
+            // Tạo menu dưới dạng mảng string
+            string[] menuLines = {
+                "            ALL TOOL IN ONE TOOL                      ",
+                "------------------------------------------------------",
+                "|  STATUS    |        NAME                    | YEAR |",
+                "------------------------------------------------------",
+                "[1] Active   | Active Windows / Office        | 2025 |",
+                "[2] Active   | File Classification            | 2025 |",
+                "[3] Active   | Crawl Data Facebook/Instagram  | 2025 |",
+                "------------------------------------------------------",
+                "Choose a menu option: "
+            };
+            int startY = (consoleHeight - menuLines.Length) / 2;
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            for (int i = 0; i < menuLines.Length - 1; i++)
+            {
+                string line = menuLines[i];
+                int startX = (consoleWidth - line.Length) / 2;
+                Console.SetCursorPosition(startX, startY + i);
+                Console.WriteLine(line);
+            }
+            Console.ResetColor();
+
+            Console.SetCursorPosition(
+                (consoleWidth - menuLines[^1].Length) / 2,
+                startY + menuLines.Length - 1);
+            Console.Write(menuLines[^1]);
+
+            string? choice = Console.ReadLine();
+            Console.Clear();
+
             switch (choice)
             {
                 case "1":
-                    Console.SetCursorPosition((consoleWidth - "Tool 1 opened!".Length) / 2, consoleHeight - 2);
-                    Console.WriteLine("Tool 1 opened!");
+                    Console.WriteLine("[1]. Active | Windows / Office | 2025 selected!");
+                    ow.Active();
                     break;
                 case "2":
-                    Console.SetCursorPosition((consoleWidth - "Tool 2 opened!".Length) / 2, consoleHeight - 2);
-                    Console.WriteLine("Tool 2 opened!");
+                    Console.WriteLine("[2] Active | File Classification | 2025 selected!");
+                    fileExtention.SourcFile();
                     break;
                 case "3":
-                    Console.SetCursorPosition((consoleWidth - "Tool 3 opened!".Length) / 2, consoleHeight - 2);
-                    Console.WriteLine("Tool 3 opened!");
-                    break;
-                case "4":
-                    Console.SetCursorPosition((consoleWidth - "Settings menu opened!".Length) / 2, consoleHeight - 2);
-                    Console.WriteLine("Settings menu opened!");
-                    break;
-                case "5":
-                    Console.SetCursorPosition((consoleWidth - "Exiting...".Length) / 2, consoleHeight - 2);
-                    Console.WriteLine("Exiting...");
-                    exit = true;
+                    MenuCrawlDataFBINS();
                     break;
                 default:
-                    Console.SetCursorPosition((consoleWidth - "Invalid choice, please try again.".Length) / 2, consoleHeight - 2);
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Invalid choice, please try again.");
                     Console.ResetColor();
                     break;
             }
+
+            Console.WriteLine("\nPress any key to return to the menu...");
+            Console.ReadKey();
         }
+    }
+
+    public static void MenuCrawlDataFBINS()
+    {
+        string[] menuFbIg = {
+            "            ALL TOOL IN ONE TOOL                      ",
+            "------------------------------------------------------",
+            "|  STATUS    |        NAME                    | YEAR |",
+            "------------------------------------------------------",
+            "[1] Active   | Crawl My Friend                | 2025 |",
+            "------------------------------------------------------",
+            "Choose a menu option: "
+        };
+
+        int consoleWidth = Console.WindowWidth;
+        int consoleHeight = Console.WindowHeight;
+
+        int startY = (consoleHeight - menuFbIg.Length) / 2;
+        Crawl crawl = new Crawl();
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        for (int i = 0; i < menuFbIg.Length - 1; i++)
+        {
+            string line = menuFbIg[i];
+            int startX = (consoleWidth - line.Length) / 2;
+            Console.SetCursorPosition(startX, startY + i);
+            Console.WriteLine(line);
+        }
+        Console.ResetColor();
+
+        // Vị trí lựa chọn
+        Console.SetCursorPosition(
+            (consoleWidth - menuFbIg[^1].Length) / 2,
+            startY + menuFbIg.Length - 1);
+        Console.Write(menuFbIg[^1]);
+
+        string? choice = Console.ReadLine();
+        Console.Clear();
+
+        // Xử lý lựa chọn của người dùng
+        switch (choice)
+        {
+            case "1":
+                //Console.WriteLine("[1] Active   | Crawl My Friend | 2025 selected!");
+                crawl.GetData();
+                break;
+            default:
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Invalid choice, please try again.");
+                Console.ResetColor();
+                break;
+        }
+
+        Console.WriteLine("\nPress any key to return to the menu...");
+        Console.ReadKey();
     }
 }
