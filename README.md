@@ -4,5 +4,5 @@ The **All-In-One Tool** combines multiple essential utilities into one platform.
 
 | **Menu Overview**                                 | **Active Windows and Office Tools**               |
 |----------------------------------------------------|----------------------------------------------------|
-| ![Menu](https://github.com/user-attachments/assets/400ef99a-e828-41e3-a7c4-a595c4309996) | ![Active Tools](https://github.com/user-attachments/assets/c255ed57-c193-4634-9876-4a773c3334b9) |
+| ![Menu](https://github.com/user-attachments/assets/be97ff45-5214-40a5-821a-5bd81cc76de0) | ![Active Tools](https://github.com/user-attachments/assets/c255ed57-c193-4634-9876-4a773c3334b9) |
 | *Simplified menu interface for quick navigation.* | *Seamlessly manage and activate tools on the go.* |
